@@ -1,0 +1,32 @@
+ <!doctype html>
+ <html lang='en'>
+ <head>
+ 	<meta charset='utf-8'>
+ 	<title>my first pdfmake example</title>
+ 	<script src='build/pdfmake.min.js'></script>
+ 	<script src='build/vfs_fonts.js'></script>
+ </head>
+ <body>
+ 	<?php
+
+ 	var docDefinition = {content: 'Esta es una muestra impresa en PDF con pdfMake' 
+ 	footer: function(currentPage, pageCount) { return currentPage.toString() + ' of ' + pageCount; },
+        header: function(currentPage, pageCount) {
+    // you can apply any logic and return any valid pdfmake element
+
+    return { text: 'simple text', alignment: (currentPage % 2) ? 'left' : 'right' };
+  },
+  // a string or { width: number, height: number }
+  pageSize: 'A5',
+
+  // by default we use portrait, you can change it to landscape if you wish
+  pageOrientation: 'landscape',
+
+  // [left, top, right, bottom] or [horizontal, vertical] or just a number for equal margins
+  pageMargins: [ 40, 60, 40, 60 ],
+
+  };
+
+  <?
+ </body>
+ </html>

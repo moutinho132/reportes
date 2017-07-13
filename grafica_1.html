@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>CMA/REPORT</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+        <script src="https://www.amcharts.com/lib/3/serial.js"></script>
+        <script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+        <script src="https://www.amcharts.com/lib/3/plugins/export/export.js"></script>
+        <script src='pdfmake/pdfmake.min.js'></script>
+        <script src='pdfmake/vfs_fonts.js'></script>
+        <script src='pdfmake/script.js'></script> 
+         <!-- Bootstrap -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+        <script src="js/bootstrap.min.js"></script>
+
+        <link rel="stylesheet" type="text/css" href="css/estilos.css">
+        <script src="js/filesaver.js" type="text/javascript"></script>
+        <script src="js/html2canvas.js" type="text/javascript"></script>  
+        
+        <style>
+         .chartdiv {
+          width: 800px;
+          height: 220px;
+        
+        }
+        </style>
+        <script>
+            var chart;
+
+            var chartData = [
+                {
+                    "year": 2005,
+                    "income": 23.5
+                },
+                {
+                    "year": 2006,
+                    "income": 26.2
+                },
+                {
+                    "year": 2007,
+                    "income": 30.1
+                },
+                {
+                    "year": 2008,
+                    "income": 29.5
+                },
+                {
+                    "year": 2009,
+                    "income": 24.6
+                }
+            ];
+
+
+            AmCharts.ready(function () {
+                // SERIAL CHART
+                chart = new AmCharts.AmSerialChart();
+                chart.dataProvider = chartData;
+                chart.categoryField = "year";
+                // this single line makes the chart a bar chart,
+                // try to set it to false - your bars will turn to columns
+                chart.rotate = true;
+                // the following two lines makes chart 3D
+                chart.depth3D = 20;
+                chart.angle = 30;
+
+                // AXES
+                // Category
+                var categoryAxis = chart.categoryAxis;
+                categoryAxis.gridPosition = "start";
+                categoryAxis.axisColor = "#DADADA";
+                categoryAxis.fillAlpha = 1;
+                categoryAxis.gridAlpha = 0;
+                categoryAxis.fillColor = "#FAFAFA";
+
+                // value
+                var valueAxis = new AmCharts.ValueAxis();
+                valueAxis.axisColor = "#DADADA";
+                valueAxis.title = "Income in millions, USD";
+                valueAxis.gridAlpha = 0.1;
+                chart.addValueAxis(valueAxis);
+
+                // GRAPH
+                var graph = new AmCharts.AmGraph();
+                graph.title = "Income";
+                graph.valueField = "income";
+                graph.type = "column";
+                graph.balloonText = "Income in [[category]]:[[value]]";
+                graph.lineAlpha = 0;
+                graph.fillColors = "#bf1c25";
+                graph.fillAlphas = 1;
+                chart.addGraph(graph);
+
+                chart.creditsPosition = "top-right";
+
+                // WRITE
+                chart.write("chartdiv");
+            });
+            $(function() { 
+          $("#crearimagen").click(function() { 
+              html2canvas($("#contenido"), {
+                  onrendered: function(canvas) {
+                      theCanvas = canvas;
+                      document.body.appendChild(canvas);
+
+                      /*
+                      canvas.toBlob(function(blob) {
+                        saveAs(blob, "Dashboard.png"); 
+                      });
+                      */
+                  }
+              });
+          });
+      });
+      
+        </script>
+    
+          
+    
+        
+ 
+              
+    
+        
+    </head>
+    <body>
+        <div class="container">
+
+                <h1>Convertir Contenido en Imagen</h1>   
+
+                <div class="row" id="contenido">
+                <div id="chartdiv" style="width: 500px; height: 600px;"></div>
+
+                </div>
+                <button id="crearimagen" class="form-control"/>Crear Imagen</button>
+
+                <div class="row">
+                    <div class="col-md-12" id="img-out" align="center">
+                      <h5 style="font-weight:bold; color:purple;">Imagen:</h5>
+                      <span style="font-size:11px;">Puedes hacer click con el botón derecho del Mouse para Guardar la imagen.</span>        
+                    </div>
+                </div>   
+        </div>
+    </body>
+</html>

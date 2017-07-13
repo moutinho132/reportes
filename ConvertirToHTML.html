@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <script src='pdfmake/pdfmake.min.js'></script>
+        <script src='pdfmake/vfs_fonts.js'></script>
+        <script src='pdfmake/script.js'></script>
+    <script>
+     function demoFromHTML() {
+         var doc = new jsPDF('p', 'in', 'letter');
+         var source = $('#testcase').first();
+         var specialElementHandlers = {
+             '#bypassme': function(element, renderer) {
+                 return true;
+             }
+         };
+
+         doc.fromHTML(
+             source, // HTML string or DOM elem ref.
+             0.5,    // x coord
+             0.5,    // y coord
+             {
+                 'width': 7.5, // max width of content on PDF
+                 'elementHandlers': specialElementHandlers
+             });
+
+         doc.output('dataurl');
+    }
+</script>
+
+    </head>
+    <body>
+            <a href="javascript:demoFromHTML()" class="button">Pdf</a>
+            <div id="testcase">
+                <h1>  
+                Example text..
+                </h1>
+            </div>
+    </body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Highcharts Example</title>
+		
+		
+		<!-- 1. Add these JavaScript inclusions in the head of your page -->
+	 <script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+        
+        <style>#container {
+    max-width: 800px;
+    height: 400px;
+    margin: 1em auto;
+}</style>
+		
+		<!-- 2. Add the JavaScript to initialize the chart on document ready -->
+		<script type="text/javascript">
+		
+			
+		</script>
+		
+	
+	<body>
+		<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+        
+<div id="container"></div>
+<script type="text/javascript">
+    var resultado;
+    Highcharts.chart('container', {
+
+    credits: {
+        enabled: false
+    },
+
+    xAxis: {
+        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+    },
+
+    series: [{
+        data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
+    }],
+
+    exporting: {
+        buttons: {
+            contextButton: {
+                menuItems: null,
+                
+                onclick: function () {
+                   resultado= this.exportChart();
+                   
+                    
+                    
+                }
+            }
+        }
+    }
+    console.log(resultado);
+});
+</script>		
+	</body>
+</html>

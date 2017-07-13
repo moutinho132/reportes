@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>CMA/REPORT</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     
+        <script src="amcharts/amcharts.js"></script>
+        <script src="amcharts/serial.js"></script>
+        <script src="amcharts/themes/light.js"></script>
+        <script src="amcharts/plugins/export/export.js"></script>
+        
+        
+        <script src='pdfmake/pdfmake.min.js'></script>
+        <script src='pdfmake/vfs_fonts.js'></script>
+        <script src='pdfmake/script.js'></script> 
+         <!-- Bootstrap -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+        <script src="js/bootstrap.min.js"></script>
+
+        <link rel="stylesheet" type="text/css" href="css/estilos.css">
+        <script src="js/filesaver.js" type="text/javascript"></script>
+        <script src="js/html2canvas.js" type="text/javascript"></script>  
+        
+        <script src='pdfmake/pdfmake.min.js'></script>
+        <script src='pdfmake/vfs_fonts.js'></script>
+        <script src='pdfmake/script.js'></script>
+        <script src="js/reportepdf.js"></script>
+    
+        <script src="https://code.highcharts.com/highcharts.js"></script>
+        <script src="https://code.highcharts.com/modules/exporting.js"></script>
+        
+        <style>
+         .chartdiv {
+          width: 800px;
+          height: 220px;
+        
+        }
+        </style>
+        
+    
+          
+    
+        
+        <script type="text/javascript">  
+            
+              
+                
+                //grafica
+              
+                
+            AmCharts.makeChart( "chart1", {
+                "type": "serial",
+                "theme": "light",
+                "autoMargins": false,
+                "marginLeft": 50,
+                "marginRight": 8,
+                "marginTop": 30,
+                "marginBottom": 26,
+                "dataProvider": [ {
+                  "country": "USA",
+                  "visits": 2025
+                }, {
+                  "country": "China",
+                  "visits": 1882
+                }, {
+                  "country": "Japan",
+                  "visits": 1809
+                }, {
+                  "country": "Germany",
+                  "visits": 1322
+                }, {
+                  "country": "UK",
+                  "visits": 1122
+                }, {
+                  "country": "France",
+                  "visits": 1114
+                }, {
+                  "country": "India",
+                  "visits": 984
+                }, {
+                  "country": "Spain",
+                  "visits": 711
+                } ],
+                "valueAxes": [ {
+                  "gridColor": "#FFFFFF",
+                  "gridAlpha": 0.2,
+                  "dashLength": 0
+                } ],
+                "startDuration": 1,
+                "graphs": [ {
+                  "balloonText": "[[category]]: <b>[[value]]</b>",
+                  "fillAlphas": 0.8,
+                  "lineAlpha": 0.2,
+                  "type": "column",
+                  "valueField": "visits"
+                } ],
+                "chartCursor": {
+                  "categoryBalloonEnabled": false,
+                  "cursorAlpha": 0,
+                  "zoomable": false
+                },
+                "categoryField": "country",
+                "categoryAxis": {
+                  "gridPosition": "start",
+                  "gridAlpha": 0,
+                  "tickPosition": "start",
+                  "tickLength": 20
+                },
+                "export": {
+                  "enabled": true,
+                  "menu": []
+                }
+
+            } );
+              /*  AmCharts.makeChart( "chart2", {
+                    "type": "serial",
+                    "addClassNames": true,
+                    "theme": "light",
+                    "autoMargins": false,
+                    "marginLeft": 50,
+                    "marginRight": 8,
+                    "marginTop": 30,
+                    "marginBottom": 26,
+                    "balloon": {
+                      "adjustBorderColor": false,
+                      "horizontalPadding": 10,
+                      "verticalPadding": 8,
+                      "color": "#ffffff"
+                    },
+
+                    "dataProvider": [ {
+                      "year": 2009,
+                      "income": 23.5,
+                      "expenses": 21.1
+                    }, {
+                      "year": 2010,
+                      "income": 26.2,
+                      "expenses": 30.5
+                    }, {
+                      "year": 2011,
+                      "income": 30.1,
+                      "expenses": 34.9
+                    }, {
+                      "year": 2012,
+                      "income": 29.5,
+                      "expenses": 31.1
+                    }, {
+                      "year": 2013,
+                      "income": 30.6,
+                      "expenses": 28.2,
+                    }, {
+                      "year": 2014,
+                      "income": 34.1,
+                      "expenses": 32.9,
+                      "dashLengthColumn": 5,
+                      "alpha": 0.2,
+                      "additional": "(projection)"
+                    } ],
+                    "valueAxes": [ {
+                      "gridColor": "#FFFFFF",
+                      "gridAlpha": 0.2,
+                      "dashLength": 0
+                    } ],
+                    "startDuration": 1,
+                    "graphs": [ {
+                      "alphaField": "alpha",
+                      "balloonText": "<span style='font-size:12px;'>[[title]] in [[category]]:<br><span style='font-size:20px;'>[[value]]</span> [[additional]]</span>",
+                      "fillAlphas": 1,
+                      "title": "Income",
+                      "type": "column",
+                      "valueField": "income",
+                      "dashLengthField": "dashLengthColumn"
+                    }, {
+                      "id": "graph2",
+                      "balloonText": "<span style='font-size:12px;'>[[title]] in [[category]]:<br><span style='font-size:20px;'>[[value]]</span> [[additional]]</span>",
+                      "bullet": "round",
+                      "lineThickness": 3,
+                      "bulletSize": 7,
+                      "bulletBorderAlpha": 1,
+                      "bulletColor": "#FFFFFF",
+                      "useLineColorForBulletBorder": true,
+                      "bulletBorderThickness": 3,
+                      "fillAlphas": 0,
+                      "lineAlpha": 1,
+                      "title": "Expenses",
+                      "valueField": "expenses"
+                    } ],
+                    "categoryField": "year",
+                    "categoryAxis": {
+                      "gridPosition": "start",
+                      "gridAlpha": 0,
+                      "tickPosition": "start",
+                      "tickLength": 20
+                    },
+                    "export": {
+                      "enabled": true,
+                      "menu": []
+                    }
+                  } );
+
+           /* AmCharts.makeChart( "chart3", {
+                    "type": "serial",
+                    "theme": "light",
+                    "autoMargins": false,
+                    "marginLeft": 50,
+                    "marginRight": 8,
+                    "marginTop": 30,
+                    "marginBottom": 26,
+                    "dataProvider": [ {
+                      "date": "2012-03-01",
+                      "price": 20
+                    }, {
+                      "date": "2012-03-02",
+                      "price": 75
+                    }, {
+                      "date": "2012-03-03",
+                      "price": 15
+                    }, {
+                      "date": "2012-03-04",
+                      "price": 75
+                    }, {
+                      "date": "2012-03-05",
+                      "price": 158
+                    }, {
+                      "date": "2012-03-06",
+                      "price": 57
+                    }, {
+                      "date": "2012-03-07",
+                      "price": 107
+                    }, {
+                      "date": "2012-03-08",
+                      "price": 89
+                    }, {
+                      "date": "2012-03-09",
+                      "price": 75
+                    }, {
+                      "date": "2012-03-10",
+                      "price": 132
+                    }, {
+                      "date": "2012-03-11",
+                      "price": 158
+                    }, {
+                      "date": "2012-03-12",
+                      "price": 56
+                    }, {
+                      "date": "2012-03-13",
+                      "price": 169
+                    }, {
+                      "date": "2012-03-14",
+                      "price": 24
+                    }, {
+                      "date": "2012-03-15",
+                      "price": 147
+                    } ],
+                    "valueAxes": [ {
+                      "logarithmic": true,
+                      "dashLength": 1,
+                      "guides": [ {
+                        "dashLength": 6,
+                        "inside": true,
+                        "label": "average",
+                        "lineAlpha": 1,
+                        "value": 90.4
+                      } ],
+                      "position": "left"
+                    } ],
+                    "graphs": [ {
+                      "bullet": "round",
+                      "id": "g1",
+                      "bulletBorderAlpha": 1,
+                      "bulletColor": "#FFFFFF",
+                      "bulletSize": 7,
+                      "lineThickness": 2,
+                      "title": "Price",
+                      "type": "smoothedLine",
+                      "useLineColorForBulletBorder": true,
+                      "valueField": "price"
+                    } ],
+                    "chartCursor": {
+                      "valueLineEnabled": true,
+                      "valueLineBalloonEnabled": true,
+                      "valueLineAlpha": 0.5,
+                      "fullWidth": true,
+                      "cursorAlpha": 0.05
+                    },
+                    "dataDateFormat": "YYYY-MM-DD",
+                    "categoryField": "date",
+                    "categoryAxis": {
+                      "parseDates": true,
+                      "gridPosition": "start",
+                      "gridAlpha": 0,
+                      "tickPosition": "start",
+                      "tickLength": 20
+                    },
+                    "export": {
+                      "enabled": true,
+                      "menu": []
+                    }
+              } );*/
+              
+              
+            /**
+             * Función que activa la exportación de todos los gráficos a PDF
+             */
+               
+                
+                
+              
+                           
+                            
+                            
+                            
+                                
+        </script>
+        
+    </head>
+    <body >
+      
+        <div class="container">
+            <div class="row" id="contenido">
+                
+               
+                <input style="alignment-adjust: " type="button" value="Exportar Reportes de Graficas a PDF" onclick="exportCharts(document.getElementById('htmlContent'))" />
+               
+                <div id="chart1" class="chartdiv" style="alignment-adjust: central"></div>
+                <!--<div id="chart2" class="chartdiv"></div>
+                <!--<div id="chart3" class="chartdiv"></div>-->
+                
+               
+                
+                    <div class="row" id="contenido2">
+                           <footer>
+                               <div class="container text-center">
+                                 <p class="text-muted credit">
+                                   Desarrollado por Fernando moutinho
+                                 </p>
+                               </div>        
+                             </footer>
+
+
+
+
+
+                         <div class="row">
+                                 <div class="col-md-12" id="img-out" align="center">
+                                     <h5 style="font-weight:bold; color:purple; " class="text-justify">Cargando el Cotendito HTMl en el PDF</h5>
+                                   <span style="font-size:11px;">Puedes hacer click con el botón derecho del Mouse para Guardar la imagen.</span>        
+                                 </div>
+                         </div>     
+                    </div> 
+            </div>
+            
+        
+       
+          
+                        
+                        <div id="htmlContent">
+                                        <p>Este es el contenido que esta dentro de un div</p>
+                                        <p>Desarrollado por Fernando Moutinho Solo contenido de texto..</p>
+                                <div class="container-fluid">
+                                       
+                                        <div class="row">
+                                          <div class="col-sm-4" style="background-color:lavender;">.col-sm-4</div>
+                                          <div class="col-sm-4" style="background-color:lavenderblush;">.col-sm-4</div>
+                                          <div class="col-sm-4" style="background-color:lavender;">.col-sm-4</div>
+                                        </div>
+
+
+
+
+                                </div>
+                                        
+                            </div>
+                        <button id="export">export</button>
+                       <div id="chart_exchange" style="width: 450px; height: 400px; margin: 0 auto"></div>
+                        <canvas id="chart_exchange_canvas" width="900" height="800"></canvas>
+                    
+                        <div id="result">
+                        
+                            <button id="crearimagen" class="form-control" onclick="cargarContenido(document.getElementById('crearimagen'),document.getElementById('graficaH'))"/>Crear Imagen del Div</button>
+                        </div>
+            
+            
+        </div>
+        <button id='save_btn' onclick="cargarContenido()">Save Chart</button>
+        <div id='container1'></div>
+      
+		<script type="text/javascript">
+//chart
+$.getJSON('https://www.highcharts.com/samples/data/jsonp.php?filename=usdeur.json&callback=?', function(data) {
+
+  Highcharts.chart('chart_exchange', {
+    chart: {
+      zoomType: 'x'
+    },
+    title: {
+      text: 'USD to EUR exchange rate over time'
+    },
+    subtitle: {
+      text: document.ontouchstart === undefined ?
+        'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in'
+    },
+    xAxis: {
+      type: 'datetime'
+    },
+    yAxis: {
+      title: {
+        text: 'Exchange rate'
+      }
+    },
+    legend: {
+      enabled: false
+    },
+    plotOptions: {
+      area: {
+        fillColor: {
+          linearGradient: {
+            x1: 0,
+            y1: 0,
+            x2: 0,
+            y2: 1
+          },
+          stops: [
+            [0, Highcharts.getOptions().colors[0]],
+            [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+          ]
+        },
+        marker: {
+          radius: 2
+        },
+        lineWidth: 1,
+        states: {
+          hover: {
+            lineWidth: 1
+          }
+        },
+        threshold: null
+      }
+    },
+
+    series: [{
+      type: 'area',
+      name: 'USD to EUR',
+      data: data
+    }]
+  });
+});
+		</script>
+    </body>
+</html>
